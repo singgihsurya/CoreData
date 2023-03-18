@@ -45,14 +45,6 @@ class ViewController: UIViewController {
         }
     }
     
-    private func getDate() -> String {
-        let date = Date()
-        let df = DateFormatter()
-        df.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let dateString = df.string(from: date)
-        return dateString
-    }
-    
     private func checkData() -> Bool {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return false}
         let manageObjContext = appDelegate.persistentContainer.viewContext
