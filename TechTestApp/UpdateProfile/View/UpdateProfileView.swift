@@ -142,8 +142,14 @@ class UpdateProfileView: UIViewController {
                     self?.showToast(message: "Access Denied", font: .systemFont(ofSize: 14.0))
                 }
             })
-        } else {
+        } else if photos != .authorized {
             self.showToast(message: "Access Denied", font: .systemFont(ofSize: 14.0))
+        } else if photos == .authorized {
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.allowsEditing = true
+            picker.sourceType = .photoLibrary
+            self.present(picker, animated: true)
         }
     }
     
