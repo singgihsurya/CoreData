@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AVFoundation
+import PhotosUI
 
 class UpdateProfileView: UIViewController {
     // OUTLETS HERE
@@ -125,11 +127,24 @@ class UpdateProfileView: UIViewController {
     }
     
     @IBAction func uploadTapped(_ sender: Any) {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        picker.sourceType = .photoLibrary
-        present(picker, animated: true)
+        let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({[weak self] status in
+                if status == .authorized{
+                    DispatchQueue.main.async {
+                        let picker = UIImagePickerController()
+                        picker.delegate = self
+                        picker.allowsEditing = true
+                        picker.sourceType = .photoLibrary
+                        self?.present(picker, animated: true)
+                    }
+                } else {
+                    self?.showToast(message: "Access Denied", font: .systemFont(ofSize: 14.0))
+                }
+            })
+        } else {
+            self.showToast(message: "Access Denied", font: .systemFont(ofSize: 14.0))
+        }
     }
     
     @IBAction func saveTapped(_ sender: Any) {
