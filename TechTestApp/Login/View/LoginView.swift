@@ -51,17 +51,12 @@ class LoginView: UIViewController {
             print("Server Error / Unknown Error")
             // show UI Server is Error
         }
-
-        self.viewModel.didGetData = {
-            // update UI after get data
-        }
         
         self.viewModel.didGetErrorStore = { [weak self] result in
             self?.showToast(message: result, font: .systemFont(ofSize: 14.0))
         }
         
         self.viewModel.didFetchSuccess = { [weak self] in
-    
             self?.navigationController?.pushViewController(UpdateProfileView(), animated: true)
         }
     }

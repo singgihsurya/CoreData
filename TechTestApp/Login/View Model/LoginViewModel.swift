@@ -10,13 +10,6 @@ import UIKit
 import CoreData
 
 class LoginViewModel {
-
-    private var model: [LoginModel] = [LoginModel]() {
-        didSet {
-            self.count = self.model.count
-        }
-    }
-
     /// Count your data in model
     var count: Int = 0
 
@@ -46,15 +39,11 @@ class LoginViewModel {
         }
     }
 
-    /// Define selected model
-    var selectedObject: LoginModel?
-
     //MARK: -- Closure Collection
     var showAlertClosure: (() -> ())?
     var updateLoadingStatus: (() -> ())?
     var internetConnectionStatus: (() -> ())?
     var serverErrorStatus: (() -> ())?
-    var didGetData: (() -> ())?
     var didGetErrorStore: ((String) -> ())?
     var didFetchSuccess: (() -> ())?
 

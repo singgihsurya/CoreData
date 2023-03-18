@@ -10,16 +10,8 @@ import CoreData
 import UIKit
 
 class UpdateProfileViewModel {
-    
-    private var model: [UpdateProfileModel] = [UpdateProfileModel]() {
-        didSet {
-            self.count = self.model.count
-        }
-    }
-    
-    /// Count your data in model
-    var count: Int = 0
     var username: String?
+    var dateFromPicker: String?
     
     /// Define boolean for internet status, call when network disconnected
     var isDisconnected: Bool = false {
@@ -45,15 +37,11 @@ class UpdateProfileViewModel {
         }
     }
     
-    /// Define selected model
-    var selectedObject: UpdateProfileModel?
-    var dateFromPicker: String?
     //MARK: -- Closure Collection
     var showAlertClosure: (() -> ())?
     var updateLoadingStatus: (() -> ())?
     var internetConnectionStatus: (() -> ())?
     var serverErrorStatus: (() -> ())?
-    var didGetData: (() -> ())?
     var didGetErrorFetch: ((String) -> ())?
     var didGetName: ((String) -> ())?
     var didGetBirthDate: ((String) -> ())?
@@ -61,7 +49,6 @@ class UpdateProfileViewModel {
     var didUpdateSuccess:((String) -> ())?
     var didGetUname: ((String) -> ())?
 
-    
 }
 
 extension UpdateProfileViewModel {

@@ -65,10 +65,6 @@ class UpdateProfileView: UIViewController {
             // show UI Server is Error
         }
         
-        self.viewModel.didGetData = {
-            // update UI after get data
-        }
-        
         self.viewModel.didGetName = { [weak self] name in
             self?.nameField.text = name
         }
@@ -115,13 +111,13 @@ class UpdateProfileView: UIViewController {
         
         let imagePath = documentsPath.appendingPathComponent(avatar).path
         guard fileManager.fileExists(atPath: imagePath) else {
-            print("Image does not exist at path: \(imagePath)")
+            showToast(message: "Image not found", font: .systemFont(ofSize: 14.0))
             return nil
         }
         if let imageData = UIImage(contentsOfFile: imagePath) {
             return imageData
         } else {
-            print("UIImage could not be created.")
+            showToast(message: "Save failed", font: .systemFont(ofSize: 14.0))
             return nil
         }
     }
